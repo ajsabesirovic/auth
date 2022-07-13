@@ -1,7 +1,10 @@
 import classes from "./ProfileForm.module.css";
 import { useContext, useRef } from "react";
 import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router-dom";
+
 const ProfileForm = () => {
+  const history = useHistory();
   const key = process.env.REACT_APP_API_KEY;
   const newPasswordRef = useRef();
   const authCtx = useContext(AuthContext);
@@ -19,7 +22,9 @@ const ProfileForm = () => {
         }),
         headers: { "Content-Type": "application/json" },
       }
-    ).then((res) => {});
+    ).then((res) => {
+      history.replace("/");
+    });
   };
   return (
     <form className={classes.form} onSubmit={submitHandler}>
